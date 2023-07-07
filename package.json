@@ -1,0 +1,45 @@
+{
+    "name": "utility-bot",
+    "version": "1.0.0",
+    "description": "./dist/Index.js",
+    "main": "",
+    "scripts": {
+        "start": "ts-node src/Index.ts",
+        "start:dev": "nodemon",
+        "start:prod": "cross-env TS_NODE_BASEURL=dist node -r tsconfig-paths/register dist/Index.js",
+        "build": "tsc",
+        "watch": "tsc -w"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@prisma/client": "^4.16.2",
+        "ascii-table3": "^0.8.2",
+        "chalk": "^4.1.2",
+        "common-tags": "^1.8.2",
+        "discord.js": "^14.11.0",
+        "dotenv": "^16.3.1",
+        "glob": "^10.3.1",
+        "lodash": "^4.17.21",
+        "moment": "^2.29.4",
+        "mongoose": "^7.3.2",
+        "ms": "^2.1.3",
+        "uuid": "^9.0.0"
+    },
+    "devDependencies": {
+        "@types/common-tags": "^1.8.1",
+        "@types/glob": "^8.1.0",
+        "@types/lodash": "^4.14.195",
+        "@types/ms": "^0.7.31",
+        "@types/node": "^20.4.0",
+        "@types/uuid": "^9.0.2",
+        "cross-env": "^7.0.3",
+        "nodemon": "^2.0.22",
+        "prima": "^0.0.1",
+        "ts-node": "^10.9.1",
+        "ts-node-dev": "^2.0.0",
+        "tsconfig-paths": "^4.2.0",
+        "typescript": "^5.1.6"
+    }
+}
