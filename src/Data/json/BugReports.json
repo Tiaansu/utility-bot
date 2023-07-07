@@ -1,0 +1,5 @@
+{
+    "onReport": "Your report has been submitted, please wait for the developer(s) to check this report.",
+    "onError": "There was an error while updating the report (Report ID: **{{REPORT_ID}}**).",
+    "onResolved": "We have resolved your bug report (Report ID: **{{REPORT_ID}}**). Thank you for bringing this to our attention!"
+}

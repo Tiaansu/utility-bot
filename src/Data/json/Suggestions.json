@@ -1,0 +1,5 @@
+{
+    "onSuggest": "Your suggestion has been submitted, please wait for the developer(s) to check this suggestion.",
+    "onError": "There was an error while updating the suggestion (Suggestion ID: **{{SUGGESTION_ID}}**).",
+    "onChecked": "Your suggestion **{{SUGGESTION_ID}}** has been checked by the developer(s) and the response is **{{RESPONSE}}**."
+}

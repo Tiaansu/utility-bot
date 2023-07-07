@@ -31,6 +31,8 @@ export default async function loadComponents(client: Client) {
                 (await import(file)) as StructureImport<Component<MessageComponentInteraction> & Modal>
             ).default;
 
+            console.log(splits.at(-3)?.toLowerCase());
+
             switch (splits.at(-3)?.toLowerCase()) {
                 case 'buttons':
                     if (!component.customId) {

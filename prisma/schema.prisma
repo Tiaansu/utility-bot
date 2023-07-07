@@ -1,0 +1,28 @@
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model BugReports {
+    bugReportId          String @id @default(auto()) @map("_id") @db.ObjectId
+    bugReporterId        String @map("bug_reporter_id")
+    bugReportTitle       String @map("bug_report_title")
+    bugReportDescription String @map("bug_report_description")
+    dateReported         Int    @default(0)
+    dateResolved         Int    @default(0)
+}
+
+model Suggestions {
+    suggestionId          String @id @default(auto()) @map("_id") @db.ObjectId
+    suggestedById         String @map("suggested_by_id")
+    suggestionTitle       String @map("suggestion_title")
+    suggestionDescription String @map("suggestion_description")
+    suggestionType        String @map("suggestion_type")
+    suggestionUrl         String @map("suggestion_url")
+    dateSuggested         Int    @default(0) @map("date_suggested")
+    dateCompleted         Int    @default(0) @map("date_completed")
+}
