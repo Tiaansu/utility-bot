@@ -2,8 +2,12 @@ import { config } from "dotenv";
 config();
 
 import { Component } from "@/Structures/Component";
-import { ButtonInteraction, EmbedBuilder, TextBasedChannel, userMention } from "discord.js";
+import { ButtonInteraction, ChannelType, EmbedBuilder, ForumChannel, TextBasedChannel, TextChannel, userMention } from "discord.js";
 import { stripIndents } from "common-tags";
+import Logger from "@/Utils/Logger";
+
+const suggestionForumChannelId = process.env.ENVIRONMENT === 'dev' ? '1126780816408715264' : '1090911662342680666';
+const suggestionListChannelId = process.env.ENVIRONMENT === 'dev' ? '1126799089703600138' : '1126095794471182377';
 
 export default new Component<ButtonInteraction>({
     customId: 'priority-btn',
@@ -22,30 +26,41 @@ export default new Component<ButtonInteraction>({
             }
         }
 
-        if (process.env.ENVIRONMENT === 'dev') {
-            const message = interaction.message.embeds[0];
-            const suggestionData = await client.utility.core.suggestions.getSuggestionData(message.footer?.text!);
-            (interaction.guild?.channels.cache.get('1126799089703600138') as TextBasedChannel).send({
-                embeds: [
-                    new EmbedBuilder()
-                        .setTitle(`New priority suggestion`)
-                        .setDescription(stripIndents(`
-                            Suggested by: ${userMention(suggestionData?.suggestedById!)}
+        const response = await interaction.deferUpdate();
 
-                            Title: ${suggestionData?.suggestionTitle}
-                            Description: ${suggestionData?.suggestionDescription}
-                            Tags: ${suggestionData?.suggestionType}
+        const suggestionId = interaction.message.embeds[0].footer?.text!;
+        const suggestionData = await client.utility.core.suggestions.getSuggestionData(suggestionId);
+        (interaction.guild?.channels.cache.get(suggestionListChannelId) as TextBasedChannel).send({
+            embeds: [
+                new EmbedBuilder()
+                    .setTitle(`New priority suggestion`)
+                    .setDescription(stripIndents(`
+                        **Suggested by:** ${userMention(suggestionData?.suggestedById!)}
 
-                            Jump to suggestion: ${suggestionData?.suggestionUrl}
-                        `))
-                        .setColor('Random')
-                ]
-            });
-        }
+                        **Title:** ${suggestionData?.suggestionTitle}
+                        **Tags:** ${suggestionData?.suggestionType}
 
-        interaction.reply({
-            content: 'This suggestion are now listed as one of the priority.',
-            ephemeral: true
+                        **Description:**
+                        ${suggestionData?.suggestionDescription}
+
+                        Jump to suggestion: ${suggestionData?.suggestionUrl}
+                    `))
+                    .setColor('Random')
+            ]
         });
+
+        const thread = (interaction.guild?.channels.cache.get(suggestionForumChannelId) as ForumChannel).threads.cache.get(suggestionData?.threadId!);
+        await thread?.setName(`[PRIORITY] - ${thread.name}`);
+        await thread?.setLocked(true);
+
+        await client.utility.core.prisma.suggestions.delete({
+            where: { suggestionId: suggestionId }
+        });
+
+        response.edit({
+            content: 'This suggestion has been checked and are now marked as priority by the Community Directors.',
+            embeds: [],
+            components: []
+        })
     }
 })

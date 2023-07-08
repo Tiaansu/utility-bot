@@ -95,7 +95,7 @@ export default class Client<
 
                     return 0;
                 },
-                insertSuggestionData: async (suggestedById: string, suggestionTitle: string, suggestionDescription: string, suggestionType: string, suggestionUrl: string, dateSuggested: number): Promise<string> => {
+                insertSuggestionData: async (suggestedById: string, suggestionTitle: string, suggestionDescription: string, suggestionType: string, suggestionUrl: string, threadId: string, dateSuggested: number): Promise<string> => {
                     const suggestion = await this.utility.core.prisma.suggestions.create({
                         data: {
                             suggestedById,
@@ -103,6 +103,7 @@ export default class Client<
                             suggestionDescription,
                             suggestionType,
                             suggestionUrl,
+                            threadId,
                             dateSuggested
                         }
                     });
@@ -131,16 +132,18 @@ export default class Client<
 
                     return 0;
                 },
-                insertBugReportData: async (bugReporterId: string, bugReportTitle: string, bugReportDescription: string, dateReported: number): Promise<string> => {
+                insertBugReportData: async (bugReporterId: string, bugReportTitle: string, bugReportDescription: string, bugReportUrl: string, threadId: string, dateReported: number): Promise<string> => {
                     const bugReport = await this.utility.core.prisma.bugReports.create({
                         data: {
                             bugReporterId,
                             bugReportTitle,
                             bugReportDescription,
+                            bugReportUrl,
+                            threadId,
                             dateReported
                         }
                     });
-                    Logger.info(`New bug report from user ${chalk.bold.green((await this.utility.core.rest.get(Routes.user(bugReporterId)) as User).tag)} (${bugReporterId}).`);
+                    Logger.info(`New bug report from user ${chalk.bold.green((await this.utility.core.rest.get(Routes.user(bugReporterId)) as User).username)} (${bugReporterId}).`);
                     return bugReport.bugReportId;
                 }
             }
