@@ -11,7 +11,7 @@
         "watch": "tsc -w"
     },
     "engines": {
-        "node": ">=18.16.0 <18.16.1"
+        "node": ">=18 <18.16.1"
     },
     "keywords": [],
     "author": "",
