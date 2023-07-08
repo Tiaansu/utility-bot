@@ -25,6 +25,7 @@ export default async function loadEvents(client: Client): Promise<void> {
                 (await import(file)) as StructureImport<Event<keyof ClientEvents>>
             ).default;
 
+            // @ts-ignore
             client.on(event.name, event.run.bind(null, client));
 
             count ++;
