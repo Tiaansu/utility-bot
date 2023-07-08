@@ -19,8 +19,8 @@ export default new Component<ButtonInteraction>({
     run: async (client, interaction) => {
         if (process.env.ENVIRONMENT === 'prod') {
             if (
-                interaction.guild?.roles.cache.get('934681107247538206')?.members.has(interaction.user.id) || 
-                interaction.guild?.roles.cache.get('955285417006084126')?.members.has(interaction.user.id)
+                !interaction.guild?.roles.cache.get('934681107247538206')?.members.has(interaction.user.id) || 
+                !interaction.guild?.roles.cache.get('955285417006084126')?.members.has(interaction.user.id)
             ) {
                 interaction.reply({
                     embeds: [
