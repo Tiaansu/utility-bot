@@ -15,7 +15,7 @@ const bugReportForumChannelId = process.env.ENVIRONMENT === 'dev' ? '11270474391
 const bugReportListChannelId = process.env.ENVIRONMENT === 'dev' ? '1127053810804719696' : '1126095751496343592';
 
 export default new Component<ButtonInteraction>({
-    customId: 'bug-btn',
+    customId: 'minor-bug-btn',
     run: async (client, interaction) => {
         if (process.env.ENVIRONMENT === 'prod') {
             if (
@@ -45,7 +45,7 @@ export default new Component<ButtonInteraction>({
         (interaction.guild?.channels.cache.get(bugReportListChannelId) as TextBasedChannel).send({
             embeds: [
                 new EmbedBuilder()
-                    .setTitle('New bug report')
+                    .setTitle('New minor bug report')
                     .setDescription(stripIndents(`
                         **Suggested by:** ${userMention(bugReportData?.bugReporterId!)}
 
@@ -62,11 +62,11 @@ export default new Component<ButtonInteraction>({
         })
 
         const thread = (interaction.guild?.channels.cache.get(bugReportForumChannelId) as ForumChannel).threads.cache.get(bugReportData?.threadId!);
-        await thread?.setName(`[BUG] - ${thread.name}`);
+        await thread?.setName(`[MINOR BUG] - ${thread.name}`);
         await thread?.setLocked(true);
 
         response.edit({
-            content: 'This bug report has been checked and are now marked as bug by the Community Directors.',
+            content: 'This bug report has been checked and are now marked as minor bug by the Community Directors.',
             embeds: [],
             components: []
         })
