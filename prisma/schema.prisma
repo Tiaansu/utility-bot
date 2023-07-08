@@ -12,6 +12,8 @@ model BugReports {
     bugReporterId        String @map("bug_reporter_id")
     bugReportTitle       String @map("bug_report_title")
     bugReportDescription String @map("bug_report_description")
+    bugReportUrl         String @map("bug_report_url")
+    threadId             String @map("thread_id")
     dateReported         Int    @default(0)
     dateResolved         Int    @default(0)
 }
@@ -23,6 +25,7 @@ model Suggestions {
     suggestionDescription String @map("suggestion_description")
     suggestionType        String @map("suggestion_type")
     suggestionUrl         String @map("suggestion_url")
+    threadId              String @map("thread_id")
     dateSuggested         Int    @default(0) @map("date_suggested")
     dateCompleted         Int    @default(0) @map("date_completed")
 }
