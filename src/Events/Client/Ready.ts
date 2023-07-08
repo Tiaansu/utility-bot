@@ -4,8 +4,9 @@ import Logger from "@/Utils/Logger";
 import ms from "ms";
 import loadCommands from "@/Handler/CommandHandler";
 import loadComponents from "@/Handler/ComponentHandler";
+import Client from "@/Structures/Client";
 
-export default new Event(Events.ClientReady, async (client) => {
+export default new Event(Events.ClientReady, async (client: Client) => {
     if (!client.isReady()) return;
 
     await loadCommands(client);

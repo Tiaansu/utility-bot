@@ -1,9 +1,10 @@
-import { EmbedBuilder, Events, time } from "discord.js";
+import { CacheType, EmbedBuilder, Events, Interaction, time } from "discord.js";
 import { Event } from "@/Structures/Event";
 import chalk from "chalk";
 import Logger from "@/Utils/Logger";
+import Client from "@/Structures/Client";
 
-export default new Event(Events.InteractionCreate, async (client, interaction) => {
+export default new Event(Events.InteractionCreate, async (client: Client, interaction: Interaction<CacheType>) => {
     if (!client.isReady()) return;
 
     if (interaction.isChatInputCommand()) {

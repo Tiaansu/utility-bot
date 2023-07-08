@@ -5,7 +5,9 @@ import {
     ButtonInteraction,
     StringSelectMenuInteraction,
     Routes,
-    User
+    User,
+    ClientEvents,
+    Awaitable
 } from 'discord.js';
 import botIntents from '@/Constants/Intents';
 import botPartials from '@/Constants/Partials';
