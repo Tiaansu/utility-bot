@@ -10,6 +10,9 @@
         "build": "tsc",
         "watch": "tsc -w"
     },
+    "engines": {
+        "node": ">=18.16.0"
+    },
     "keywords": [],
     "author": "",
     "license": "ISC",
