@@ -15,3 +15,13 @@ app.get('/', (req, res) => {
 });
 
 app.listen(3000 || process.env.PORT, () => console.log(`App listening to port ${3000 || process.env.PORT}`));
+
+import axios from "axios";
+import cron from 'node-cron';
+import Logger from "@/Utils/Logger";
+
+cron.schedule('*/5 * * * *', async () => {
+    await axios.get(process.env.ENVIRONMENT === 'dev' ? 'http://localhost:3000' : 'https://lirp-utility-bot.onrender.com').then((res) => {
+        Logger.info(res.status);
+    })
+});

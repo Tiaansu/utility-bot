@@ -3,7 +3,7 @@ import { LogLevel } from "@/Enums/LogLevels";
 import { LogOptions } from "@/Interfaces/LogOptions";
 
 class Logger {
-    public info(...args: any[]): void {
+    public info(...args: any): void {
         this.logToConsole({
             level: LogLevel.INFO,
             getCallerFile: this.getCallerFile(),
@@ -11,7 +11,7 @@ class Logger {
         });
     }
 
-    public warn(...args: any[]): void {
+    public warn(...args: any): void {
         this.logToConsole({
             level: LogLevel.WARN,
             getCallerFile: this.getCallerFile(),
@@ -19,7 +19,7 @@ class Logger {
         });
     }
 
-    public error(...args: any[]): void {
+    public error(...args: any): void {
         this.logToConsole({
             level: LogLevel.ERROR,
             getCallerFile: this.getCallerFile(),
@@ -27,7 +27,7 @@ class Logger {
         });
     }
 
-    public debug(...args: any[]): void {
+    public debug(...args: any): void {
         this.logToConsole({
             level: LogLevel.DEBUG,
             getCallerFile: this.getCallerFile(),
@@ -35,7 +35,7 @@ class Logger {
         });
     }
 
-    public trace(...args: any[]): void {
+    public trace(...args: any): void {
         this.logToConsole({
             level: LogLevel.TRACE,
             getCallerFile: this.getCallerFile(),
