@@ -26,7 +26,8 @@ export default new Component<ButtonInteraction>({
                 interaction.reply({
                     embeds: [
                         new EmbedBuilder().setDescription('That button is not for you.').setColor('Red')
-                    ]
+                    ],
+                    ephemeral: true
                 });
                 return;
             }
